@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+
+    <title>E2G4 homepage</title>
+  </head>
+  <body>
+    <p id="notice"><%= notice %></p>
+
+    <div class="row">
+      <div class="col-sm-3"> 
+        <h2>Información del Restaurante</h2>
+
+        <p>
+          <strong>Name:</strong>
+          <%= @restaurant.name %>
+        </p>
+        
+        <p>
+          <strong>Email:</strong>
+          <%= @restaurant.email %>
+        </p>
+        
+        <p>
+          <strong>Address:</strong>
+          <%= @restaurant.address %>
+        </p>
+        
+        <p>
+          <strong>Rating:</strong>
+          <%= @restaurant.rating %>
+        </p>
+        
+        <p>
+          <strong>Phone:</strong>
+          <%= @restaurant.phone %>
+        </p>
+              
+      </div>
+      <div class="col-sm-1">
+        <h2>Fotos</h2>
+
+        <p>
+          No tiene fotos
+        </p>
+      </div>
+
+      <div class="col-sm-4">
+        <h2>Nuestros Platos</h2>
+
+        <p>
+        Por ahora mostramos todos los platos</p>
+        <p>Al apretar el nombre se muestran las fotos (proximamente)</p>
+        
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Portions</th>
+              <th>Rating</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @dishes.each do |dish| %>
+              <tr>
+                <td><%= dish.name %></td>
+                <td><%= dish.price %></td>
+                <td><%= dish.portions %></td>
+                <td><%= dish.rating %></td>
+                
+                <% if user_signed_in? %>
+                  <td><button class="btn btn-outline-primary">Select</button></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <% if user_signed_in? %>
+          <td><button class="btn-save btn btn-primary btn-sm">Realizar Pedido</button></td>
+        <% else %>
+          <p>
+            Inicia sesión para realizar pedido
+          </p>   
+        <% end %>
+
+      </div>
+      <div class="col-sm-3">
+        <section class="hbox stretch bg-black dker">
+          <section>
+          <h2>Comentarios</h2>
+          <p>Por ahora mostramos todos los comentarios </p>
+            <section class="vbox">
+              <section class="scrollable">
+                <% @comentarios.each do |comment| %>
+                  <div class="row">
+                    <div class="col-md-3 no-padder no-gutter homecol1">
+                      <div class="thumbnail">
+                        <img class="img-responsive user-photo" height="50" width="50" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                      </div>
+                    </div>
+                    <br>
+                    <div class="col-md-2 no-padder no-gutter homecol2">
+                      <%= comment.rating %>
+                    </div>
+                    <div class="col-md-7 no-padder no-gutter homecol3">
+                      <%= comment.content %>
+                    </div>
+                  </div>
+                  <br>
+                <% end %>
+              </section>
+              <% if user_signed_in? %>
+                <a href= "#" class="btn btn-outline-primary" >Crear Comentario</a>
+              <% else %>
+                <p>
+                  Inicia sesión para comentar
+                </p>   
+              <% end %>
+            </section>
+          </section>
+        </section>
+      </div>
+    </div>
+   
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
